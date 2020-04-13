@@ -1,5 +1,5 @@
 **Application**
-1) FrontEnd: HTML, CSS, JS, JQURY, AJAX
+1) Frontend: HTML, CSS, JS, JQURY, AJAX
 2) Backend: Scala, Slick
 3) Database: Mysql
 4) Framework: Play Framework
