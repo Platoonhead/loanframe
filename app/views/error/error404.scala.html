@@ -1,0 +1,29 @@
+@()(implicit messages: MessagesProvider)
+
+@views.html.main(messages.messages("page.not.found")) {
+
+    <style>
+            .animsition-overlay {
+                min-height: 100%;
+                background-color: transparent !important;
+            }
+
+            .main-footer {
+                padding: 30px 5px;
+                position: absolute;
+                width: 100%;
+                bottom: -170px;
+            }
+
+    </style>
+
+    <div class="container space-y-t">
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">
+                <div class="outer">
+                    <h1> ERROR 404 </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,30 @@
+@()(implicit messages: MessagesProvider)
+
+@views.html.main(messages.messages("internal.server.error")) {
+
+    <style>
+            .animsition-overlay {
+                min-height: 100%;
+                background-color: transparent !important;
+            }
+
+            .main-footer {
+                padding: 30px 5px;
+                position: absolute;
+                width: 100%;
+                bottom: -170px;
+            }
+
+    </style>
+
+    <div class="container space-y-t">
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <h1>ERROR 500</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+}

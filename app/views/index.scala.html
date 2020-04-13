@@ -1,0 +1,114 @@
+@()(implicit request: RequestHeader)
+    @import helper._
+@main("Covid 19 APP") {
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div id = 'cust-message'></div>
+                    <button style="float: right; margin: 40px 40px 0 0" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Citizen</button>
+
+                    <select  class="form-control country-dropdown" id="country-select"></select>
+                    <input type="text" id="myInput" onkeyup="myFunction(this.id)" placeholder="Search for names.." title="Type in a name">
+                    <div class="row">
+                        <div class="col-md-2 age-text">Age</div>
+                        <div class="col-md-2"><select class="form-control age-dropdown" id="comparision"><option>Select</option><option value="greater">Greater than (>)</option><option value="less">Less than (<)</option></select></div>
+                        <div class="col-md-8"> <select name="age-drop" class="form-control" id="age-drop">
+                            <option>Age</option>
+                        @for(age <- 2 to 109) {
+                            <option value="@age">@age</option>
+                        }
+                        </select><button class="age-submit btn btn-info" onclick="filterByAge()">Filter</button></div>
+                     </div>
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-2 age-text">Covid19 Status</div>
+                        <div class="col-md-2"><select class="form-control age-dropdown" id="covid-status" ><option>Select</option><option value="positive">Positive</option><option value="negative">Negative</option></select></div>
+                        <div class="col-md-8"><button class="btn btn-info" onclick="filterByCovidStatus()">Filter</button></div>
+                    </div>
+
+                    <div class="table-outer">
+                        <table class="table" d="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Is Covid Positive</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+                <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                @helper.form(action = routes.Application.addCitizen(), args = 'name -> "email-reg-submit-form", 'id -> "my-form", 'class -> "registration-form") {
+                    @CSRF.formField
+                    <div class="container">
+                        <h2>Add Citizen</h2>
+                        <p>Please fill in the details!</p>
+                        <hr>
+                        <div id = 'cust-message-pop'></div>
+                        <label for="country"><b>Country</b></label>
+                        <input id="country" type="text" placeholder="Enter Country" name="country" required>
+
+                        <label for="name"><b>Name</b></label>
+                        <input id="name" type="text" placeholder="Enter Name" name="name" required>
+
+                        <label for="age"><b>Age</b></label>
+                        <select name="age" class="form-control" id="age">
+                            @for(age <- 1 to 110) {
+                                <option value="@age">@age</option>
+                            }
+                        </select>
+                        <p></p>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-8 pt-0"><label for="isAffected"><b>Is Covid Positive?</b></label></legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isAffected" id="gridRadios1" value="true">
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isAffected" id="gridRadios2" value="false" checked>
+                                        <label class="form-check-label" for="gridRadios2">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <hr>
+                        <button id="addCitizen" class="registerbtn btn btn-info">Add</button>
+                    </div>
+
+                }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+}
